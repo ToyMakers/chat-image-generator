@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -38,8 +38,8 @@ module.exports = {
           100: "#FF6577",
         },
         bg: {
-          100: "#F5F7FA",
-          200: "#AFBACD",
+          100: "#F8F8F8", //왼
+          200: "#F0F0F0", //오
         },
         main: {
           blue: "#6BB8FE",
