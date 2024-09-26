@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
 export const useStore = create((set) => ({
+  chatList: [],
+  chatId: 0,
   user: "",
   content: "",
   time: "",
@@ -22,12 +24,12 @@ export const useStore = create((set) => ({
   timeFontSize: "",
   timeTextColor: "",
 
-  addChat: (user, content, time) =>
-    set(() => ({
-      user,
-      content,
-      time,
+  setChatList: (newList) =>
+    set((state) => ({
+      chatList: newList,
+      chatId: state.chatId + 1, // chatList 업데이트 후 chatId 증가
     })),
+  setChat: (user, content, time) => set({ user, content, time }),
   addChatStyle: (
     chatTextColor,
     chatBorderRadius,
