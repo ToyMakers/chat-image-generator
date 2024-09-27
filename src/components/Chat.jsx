@@ -1,21 +1,29 @@
+import { useChatBackgroundStore } from "../store/chatBackgroundStore.js";
 import { useStore } from "../store/chatStore.js";
 import { useProfileStore } from "../store/profileStore.js";
 
 function Chat() {
   const { chatList } = useStore();
+  const {
+    width,
+    height,
+    backgroundColor,
+    borderThickness,
+    borderColor,
+    borderStyle,
+    borderRadius,
+  } = useProfileStore();
 
-  const width = useProfileStore((state) => state.width);
-  const height = useProfileStore((state) => state.height);
-  const backgroundColor = useProfileStore((state) => state.backgroundColor);
-  const borderThickness = useProfileStore((state) => state.borderThickness);
-  const borderColor = useProfileStore((state) => state.borderColor);
-  const borderStyle = useProfileStore((state) => state.borderStyle);
-  const borderRadius = useProfileStore((state) => state.borderRadius);
+  const { backgroundMargin } = useChatBackgroundStore();
 
   return (
     <>
       {chatList.map((chat) => (
-        <div className="flex" key={chat.chatId}>
+        <div
+          className="flex"
+          style={{ marginTop: `${backgroundMargin}px` }}
+          key={chat.chatId}
+        >
           <div
             className="mr-[10px] mt-[5px]"
             style={{
