@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import { useChatBackgroundStore } from "../store/chatBackgroundStore";
 import Chat from "./Chat";
+import { useComponentStore } from "../store/showComponentStore";
 
 function ChattingContainer() {
-  const { setChatBackgroundContainer, backgroundColor, backgroundPadding } =
-    useChatBackgroundStore();
-  const handleStyleBackgroundColor = () => {
-    setChatBackgroundContainer(true);
+  const { backgroundColor, backgroundPadding } = useChatBackgroundStore();
+  const { container, setContainer } = useComponentStore();
+  const handleStyleBackgroundColor = (e) => {
+    e.stopPropagation(); // prevent other events from triggering
+    if (container !== "background") {
+      setContainer("background");
+    }
   };
-  useEffect(() => {
-    console.log(backgroundColor);
-  }, [backgroundColor]);
   return (
     <div
       onClick={handleStyleBackgroundColor}
@@ -18,7 +19,7 @@ function ChattingContainer() {
         backgroundColor: backgroundColor,
         padding: `${backgroundPadding}px`,
       }}
-      className="w-[300px] h-[500px] pt-[50px] overflow-y-scroll overflow-x-hidden hover:border-[2px]  hover:border-red-200"
+      className="w-[300px] h-[500px] pt-[50px] overflow-y-scroll overflow-x-hidden hover:border-[2px] hover:border-red-200"
     >
       <Chat />
     </div>

@@ -1,9 +1,9 @@
 import { useChatBackgroundStore } from "../store/chatBackgroundStore.js";
 import { useStore } from "../store/chatStore.js";
 import { useProfileStore } from "../store/profileStore.js";
+import { useComponentStore } from "../store/showComponentStore.js";
 
 function Chat() {
-  const { chatList } = useStore();
   const {
     width,
     height,
@@ -13,8 +13,38 @@ function Chat() {
     borderStyle,
     borderRadius,
   } = useProfileStore();
-
+  const { chatList, senderFontWeight, senderFontSize, senderTextColor } =
+    useStore();
+  const { container, setContainer } = useComponentStore();
   const { backgroundMargin } = useChatBackgroundStore();
+
+  const handleStyleProfile = (e) => {
+    e.stopPropagation(); // prevent bubbling to parent
+    if (container !== "profile") {
+      setContainer("profile");
+    }
+  };
+
+  const handleStyleUser = (e) => {
+    e.stopPropagation();
+    if (container !== "user") {
+      setContainer("user");
+    }
+  };
+
+  const handleStyleContent = (e) => {
+    e.stopPropagation();
+    if (container !== "chat") {
+      setContainer("chat");
+    }
+  };
+
+  const handleStyleTime = (e) => {
+    e.stopPropagation();
+    if (container !== "time") {
+      setContainer("time");
+    }
+  };
 
   return (
     <>
@@ -25,7 +55,7 @@ function Chat() {
           key={chat.chatId}
         >
           <div
-            className="mr-[10px] mt-[5px]"
+            className="mr-[10px] mt-[5px] hover:border-[2px] hover:border-red-200"
             style={{
               width: `${width}px`,
               height: `${height}px`,
@@ -37,16 +67,30 @@ function Chat() {
             }}
           ></div>
           <div>
-            <p className="text-[12px] font-semibold">
+            <div
+              onClick={handleStyleUser}
+              style={{
+                fontSize: `${senderFontSize}px`,
+                fontWeight: `${senderFontWeight}`,
+                color: `${senderTextColor}`,
+              }}
+              className="text-[12px] font-semibold hover:border-[2px] hover:border-red-200 pr-[0px]"
+            >
               {chat.user ? String(chat.user) : ""}
-            </p>
+            </div>
             <div className="flex">
-              <div className="w-max h-max px-[10px] py-[5px] text-[14px] bg-gray-200 rounded-[5px]">
+              <div
+                onClick={handleStyleContent}
+                className="w-max h-max px-[10px] py-[5px] text-[14px] bg-gray-200 rounded-[5px] hover:border-[2px] hover:border-red-200"
+              >
                 {chat.content ? String(chat.content) : ""}
               </div>
-              <p className="text-[10px] mt-[15px] ml-[5px]">
+              <div
+                onClick={handleStyleTime}
+                className="text-[10px] mt-[15px] ml-[5px] hover:border-[2px] hover:border-red-200"
+              >
                 {chat.time ? String(chat.time) : ""}
-              </p>
+              </div>
             </div>
           </div>
         </div>

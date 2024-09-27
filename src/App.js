@@ -1,20 +1,37 @@
 import "./App.css";
 import ChattingContainer from "./components/ChattingContainer";
 import ParticipantsContainer from "./components/ParticipantsContainer";
-import { useChatBackgroundStore } from "./store/chatBackgroundStore.js";
-import BackgroundColorProperty from "./components/BackgroundColorProperty.jsx";
-import { useState } from "react";
+import BackgroundProperty from "./components/style-container/BackgroundColorProperty.jsx";
+import { useComponentStore } from "./store/showComponentStore.js";
+import UserProperty from "./components/style-container/UserProperty.jsx";
+import ProfileProperty from "./components/style-container/ProfileProperty.jsx";
+import ChatProperty from "./components/style-container/ChatProperty.jsx";
+import TimeProperty from "./components/style-container/TimeProperty.jsx";
 function App() {
-  const [isMain, setIsMain] = useState(false);
-  const { setChatBackgroundContainer } = useChatBackgroundStore();
+  const { container, setContainer } = useComponentStore();
+
+  const choosePage = () => {
+    switch (container) {
+      case "main":
+        return <ParticipantsContainer />;
+      case "background":
+        return <BackgroundProperty />;
+      case "user":
+        return <UserProperty />;
+      case "profile":
+        return <ProfileProperty />;
+      case "chat":
+        return <ChatProperty />;
+      case "time":
+        return <TimeProperty />;
+      default:
+        return <ParticipantsContainer />;
+    }
+  };
 
   const handleShowParticipantsContainer = () => {
-    setIsMain(!isMain);
-    setChatBackgroundContainer(!isChangeBackgroundColor);
+    setContainer("main");
   };
-  const isChangeBackgroundColor = useChatBackgroundStore(
-    (state) => state.isChangeBackgroundColor
-  );
   return (
     <div className="w-[1000px] flex flex-col pt-[30px] pl-[50px]">
       <div className="flex justify-between items-center mb-[20px]">
@@ -33,13 +50,7 @@ function App() {
       </div>
       <div className="flex">
         <ChattingContainer />
-        {isChangeBackgroundColor ? (
-          <BackgroundColorProperty />
-        ) : isMain ? ( // isMain이 true일 경우 ParticipantsContainer 표시
-          <ParticipantsContainer />
-        ) : (
-          <ParticipantsContainer />
-        )}
+        <>{choosePage()}</>
       </div>
     </div>
   );

@@ -72,4 +72,16 @@ export const useStore = create((set) => ({
       timeFontSize,
       timeTextColor,
     })),
+  setSenderFontWeight: (senderFontWeight) =>
+    set(() => ({
+      senderFontWeight,
+    })),
+  setSenderFontSize: (senderFontSize) =>
+    set(() => ({
+      senderFontSize,
+    })),
+  setSenderFontColor: (senderTextColor) =>
+    set(() => ({
+      senderTextColor,
+    })),
 }));
