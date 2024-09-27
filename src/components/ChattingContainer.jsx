@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useChatBackgroundStore } from "../store/chatBackgroundStore";
 import Chat from "./Chat";
 import { useComponentStore } from "../store/showComponentStore";

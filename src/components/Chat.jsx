@@ -13,8 +13,14 @@ function Chat() {
     borderStyle,
     borderRadius,
   } = useProfileStore();
-  const { chatList, senderFontWeight, senderFontSize, senderTextColor } =
-    useStore();
+  const {
+    chatList,
+    senderFontWeight,
+    senderFontSize,
+    senderTextColor,
+    timeTextSize,
+    timeTextColor,
+  } = useStore();
   const { container, setContainer } = useComponentStore();
   const { backgroundMargin } = useChatBackgroundStore();
 
@@ -86,6 +92,10 @@ function Chat() {
                 {chat.content ? String(chat.content) : ""}
               </div>
               <div
+                style={{
+                  fontSize: `${timeTextSize}px`,
+                  color: `${timeTextColor}`,
+                }}
                 onClick={handleStyleTime}
                 className="text-[10px] mt-[15px] ml-[5px] hover:border-[2px] hover:border-red-200"
               >

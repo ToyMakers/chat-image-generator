@@ -26,7 +26,7 @@ export default function UserProperty() {
             글자 굵기
             <input
               type="number"
-              min={100} // 최소값 설정
+              min={100}
               step={100} // 100 단위로 입력받음
               onChange={(e) => setSenderFontWeight(e.target.value)}
               className="mt-[5px] pl-[10px] rounded-[5px] h-[35px]  font-normal"

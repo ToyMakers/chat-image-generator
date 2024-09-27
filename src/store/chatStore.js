@@ -18,7 +18,7 @@ export const useStore = create((set) => ({
   senderTextColor: "",
 
   //시간 스타일
-  timeFontSize: "",
+  timeTextSize: "",
   timeTextColor: "",
 
   setChatList: (user, content, time) =>
@@ -67,9 +67,12 @@ export const useStore = create((set) => ({
       chatPadding,
       chatWidth,
     })),
-  addChatTimeStyle: (timeFontSize, timeTextColor) =>
+  setTimeTextSize: (timeTextSize) =>
     set(() => ({
-      timeFontSize,
+      timeTextSize,
+    })),
+  setTimeTextColor: (timeTextColor) =>
+    set(() => ({
       timeTextColor,
     })),
   setSenderFontWeight: (senderFontWeight) =>
