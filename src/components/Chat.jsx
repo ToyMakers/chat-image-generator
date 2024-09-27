@@ -20,6 +20,12 @@ function Chat() {
     senderTextColor,
     timeTextSize,
     timeTextColor,
+    chatTextColor,
+    chatBorderRadius,
+    chatFontWeight,
+    chatFontSize,
+    chatPadding,
+    chatWidth,
   } = useStore();
   const { container, setContainer } = useComponentStore();
   const { backgroundMargin } = useChatBackgroundStore();
@@ -87,6 +93,14 @@ function Chat() {
             <div className="flex">
               <div
                 onClick={handleStyleContent}
+                style={{
+                  color: chatTextColor,
+                  borderRadius: `${chatBorderRadius}px`,
+                  fontWeight: `${chatFontWeight}`,
+                  fontSize: `${chatFontSize}px`,
+                  padding: `${chatPadding}px`,
+                  width: `${chatWidth}px`,
+                }}
                 className="w-max h-max px-[10px] py-[5px] text-[14px] bg-gray-200 rounded-[5px] hover:border-[2px] hover:border-red-200"
               >
                 {chat.content ? String(chat.content) : ""}

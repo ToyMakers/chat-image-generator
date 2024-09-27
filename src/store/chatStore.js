@@ -51,20 +51,28 @@ export const useStore = create((set) => ({
           : chat
       ),
     })),
-  addChatStyle: (
-    chatTextColor,
-    chatBorderRadius,
-    chatFontWeight,
-    chatFontSize,
-    chatPadding,
-    chatWidth
-  ) =>
+  setChatTextColor: (chatTextColor) =>
     set(() => ({
       chatTextColor,
+    })),
+  setChatBorderRadius: (chatBorderRadius) =>
+    set(() => ({
       chatBorderRadius,
+    })),
+  setChatFontWeight: (chatFontWeight) =>
+    set(() => ({
       chatFontWeight,
+    })),
+  setChatFontSize: (chatFontSize) =>
+    set(() => ({
       chatFontSize,
+    })),
+  setChatPadding: (chatPadding) =>
+    set(() => ({
       chatPadding,
+    })),
+  setChatWidth: (chatWidth) =>
+    set(() => ({
       chatWidth,
     })),
   setTimeTextSize: (timeTextSize) =>
