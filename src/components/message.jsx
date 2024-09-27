@@ -2,21 +2,21 @@
 import { useState } from "react";
 import { useStore } from "../store/chatStore.js";
 
-export default function Message() {
-  const [user, setUser] = useState();
-  const [content, setContent] = useState("");
-  const [time, setTime] = useState("");
-  const { chatId, chatList, setChatList } = useStore();
+export default function Message({
+  chatId,
+  initialUser,
+  initialContent,
+  initialTime,
+}) {
+  const [user, setUser] = useState(initialUser || "");
+  const [content, setContent] = useState(initialContent);
+  const [time, setTime] = useState(initialTime);
+  const { chatList, updateChatById } = useStore();
 
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
-    const updatedChatList = chatList.map(
-      (chat) =>
-        chat.chatId === chatId
-          ? { ...chat, user, content, time } // chatId가 일치하면 업데이트
-          : chat // 일치하지 않으면 그대로 유지
-    );
-    setChatList(updatedChatList);
+    console.log({ initialUser, initialContent, initialTime });
+    updateChatById(chatId, user, content, time);
     console.log(chatList);
   };
 
@@ -52,7 +52,7 @@ export default function Message() {
       <td>
         <button
           type="button"
-          onClick={handleSubmit}
+          onClick={handleUpdate}
           className="w-[50px] text-gray-100 hover:text-black-100"
         >
           생성

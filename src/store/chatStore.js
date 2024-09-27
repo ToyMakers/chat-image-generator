@@ -3,9 +3,6 @@ import { create } from "zustand";
 export const useStore = create((set) => ({
   chatList: [],
   chatId: 0,
-  user: "",
-  content: "",
-  time: "",
 
   // 채팅 스타일
   chatTextColor: "",
@@ -24,12 +21,36 @@ export const useStore = create((set) => ({
   timeFontSize: "",
   timeTextColor: "",
 
-  setChatList: (newList) =>
+  setChatList: (user, content, time) =>
+    set((state) => {
+      const newChatId = state.chatId + 1;
+      return {
+        chatList: [
+          ...state.chatList,
+          {
+            chatId: newChatId,
+            user,
+            content,
+            time,
+          },
+        ],
+        chatId: newChatId,
+      };
+    }),
+  // 특정 chatId의 채팅을 업데이트하는 함수 추가
+  updateChatById: (chatId, updatedUser, updatedContent, updatedTime) =>
     set((state) => ({
-      chatList: newList,
-      chatId: state.chatId + 1, // chatList 업데이트 후 chatId 증가
+      chatList: state.chatList.map((chat) =>
+        chat.chatId === chatId
+          ? {
+              chatId,
+              user: updatedUser,
+              content: updatedContent,
+              time: updatedTime,
+            }
+          : chat
+      ),
     })),
-  setChat: (user, content, time) => set({ user, content, time }),
   addChatStyle: (
     chatTextColor,
     chatBorderRadius,

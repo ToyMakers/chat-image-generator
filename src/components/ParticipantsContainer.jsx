@@ -1,21 +1,21 @@
-import { useState } from "react";
 import { useStore } from "../store/chatStore.js";
 import Message from "./message.jsx";
 
 function ParticipantsContainer() {
-  const [user, setUser] = useState();
-  const [content, setContent] = useState("");
-  const [time, setTime] = useState("");
   const { chatList, setChatList } = useStore();
   const handleAddMessage = (e) => {
     e.preventDefault();
-    const newChat = { user, content, time };
-    setChatList([...chatList, newChat]);
+    const newChat = {
+      user: "",
+      content: "",
+      time: "",
+    };
+    setChatList(newChat);
   };
 
   return (
-    <div className="w-[700px] h-[500px] bg-bg-100 ml-[20px] pt-[20px] pl-[30px]">
-      <table className="text-[13px] text-left">
+    <div className="w-[780px] h-[500px] bg-bg-100 ml-[20px] pt-[20px] pl-[30px] overflow-y-scroll overflow-x-hidden">
+      <table className="text-[13px] text-left border-separate border-spacing-2">
         <thead>
           <tr>
             <th>
@@ -26,15 +26,23 @@ function ParticipantsContainer() {
           </tr>
         </thead>
         <tbody>
-          {chatList.map((chatId) => {
-            return <Message key={chatId} />;
+          {chatList.map((chat) => {
+            return (
+              <Message
+                key={chat.chatId}
+                chatId={chat.chatId}
+                initialUser={chat.user}
+                initialContent={chat.content}
+                initialTime={chat.time}
+              />
+            );
           })}
         </tbody>
       </table>
       <button
         type="button"
         onClick={handleAddMessage}
-        className="w-[150px] mt-[50px] bg-white text-black-400 text-[13px] rounded-[5px] px-[10px] py-[5px] "
+        className="w-[150px] mt-[50px] mb-[20px] bg-white text-black-400 text-[13px] rounded-[5px] px-[10px] py-[5px] "
       >
         메시지 추가
       </button>
