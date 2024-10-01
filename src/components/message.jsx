@@ -31,8 +31,8 @@ export default function Message({
             setIsShowDropdown(!isShowDropdwn);
           }}
         >
-          선택해주세요
-          {isShowDropdwn && <UserDropdwon />}
+          {user ? "선택해주세요" : "유저 이름"}
+          {isShowDropdwn && <UserDropdwon chatId={chatId} />}
         </ul>
       </td>
       <td>
