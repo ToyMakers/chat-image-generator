@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        Pretendard: ["Pretendard"],
+      },
       colors: {
         black: {
           100: "#787878",
