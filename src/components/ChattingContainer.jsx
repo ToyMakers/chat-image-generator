@@ -13,6 +13,7 @@ function ChattingContainer() {
   };
   return (
     <div
+      id="capture"
       onClick={handleStyleBackgroundColor}
       style={{
         backgroundColor: backgroundColor,

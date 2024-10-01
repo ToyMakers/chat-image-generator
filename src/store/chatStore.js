@@ -21,6 +21,15 @@ export const useStore = create((set) => ({
   timeTextSize: "",
   timeTextColor: "",
 
+  //프로필 스타일
+  profileWidth: 0,
+  profileHeigth: 0,
+  profileBackgroundColor: "",
+  profileBorderThickness: 0,
+  profileBorderColor: "",
+  profileBorderStyle: "",
+  profileBorderRadius: 0,
+
   setChatList: (user, content, time) =>
     set((state) => {
       const newChatId = state.chatId + 1;
@@ -95,4 +104,15 @@ export const useStore = create((set) => ({
     set(() => ({
       senderTextColor,
     })),
+  //프로필 사진 setter
+  setProfileWidth: (newWidth) => set({ profileWidth: newWidth }),
+  setProfileHeight: (newHeight) => set({ profileHeight: newHeight }),
+  setProfileBackgroundColor: (newColor) =>
+    set({ profileBackgroundColor: newColor }),
+  setProfileBorderThickness: (newThickness) =>
+    set({ profileBorderThickness: newThickness }),
+  setProfileBorderColor: (newColor) => set({ profileBorderColor: newColor }),
+  setProfileBorderStyle: (newStyle) => set({ profileBorderStyle: newStyle }),
+  setProfileBorderRadius: (newRadius) =>
+    set({ profileBorderRadius: newRadius }),
 }));

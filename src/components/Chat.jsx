@@ -1,37 +1,38 @@
 import { useChatBackgroundStore } from "../store/chatBackgroundStore.js";
 import { useStore } from "../store/chatStore.js";
-import { useProfileStore } from "../store/profileStore.js";
 import { useComponentStore } from "../store/showComponentStore.js";
 
 function Chat() {
   const {
-    width,
-    height,
-    backgroundColor,
-    borderThickness,
-    borderColor,
-    borderStyle,
-    borderRadius,
-  } = useProfileStore();
-  const {
     chatList,
+    //유저 이름 속성
     senderFontWeight,
     senderFontSize,
     senderTextColor,
+    //시간 속성
     timeTextSize,
     timeTextColor,
+    //채팅(말풍선) 속성
     chatTextColor,
     chatBorderRadius,
     chatFontWeight,
     chatFontSize,
     chatPadding,
     chatWidth,
+    //프로필 사진
+    profileWidth,
+    profileHeight,
+    profileBackgroundColor,
+    profileBorderThickness,
+    profileBorderColor,
+    profileBorderStyle,
+    profileBorderRadius,
   } = useStore();
   const { container, setContainer } = useComponentStore();
   const { backgroundMargin } = useChatBackgroundStore();
 
   const handleStyleProfile = (e) => {
-    e.stopPropagation(); // prevent bubbling to parent
+    e.stopPropagation();
     if (container !== "profile") {
       setContainer("profile");
     }
@@ -66,18 +67,22 @@ function Chat() {
           style={{ marginTop: `${backgroundMargin}px` }}
           key={chat.chatId}
         >
-          <div
-            className="mr-[10px] mt-[5px] hover:border-[2px] hover:border-red-200"
-            style={{
-              width: `${width}px`,
-              height: `${height}px`,
-              backgroundColor: backgroundColor,
-              borderWidth: `${borderThickness}px`,
-              borderColor: borderColor,
-              borderStyle: borderStyle,
-              borderRadius: `${borderRadius}px`,
-            }}
-          ></div>
+          <div className="mr-[10px] h-min p-0 hover:border-[2px] hover:border-red-200">
+            <img
+              alt="프로필 사진"
+              onClick={handleStyleProfile}
+              src="./assets/profile.png"
+              style={{
+                width: `${profileWidth || 30}px`,
+                height: `${profileHeight || 30}px`,
+                backgroundColor: profileBackgroundColor,
+                borderWidth: `${profileBorderThickness}px`,
+                borderColor: profileBorderColor,
+                borderStyle: profileBorderStyle,
+                borderRadius: `${profileBorderRadius}px`,
+              }}
+            />
+          </div>
           <div>
             <div
               onClick={handleStyleUser}

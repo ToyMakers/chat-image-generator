@@ -7,8 +7,13 @@ import UserProperty from "./components/style-container/UserProperty.jsx";
 import ProfileProperty from "./components/style-container/ProfileProperty.jsx";
 import ChatProperty from "./components/style-container/ChatProperty.jsx";
 import TimeProperty from "./components/style-container/TimeProperty.jsx";
+import html2canvas from "html2canvas";
+import { useEffect, useRef } from "react";
+
 function App() {
   const { container, setContainer } = useComponentStore();
+  const captureRef = useRef(null);
+  const downloadButtonRef = useRef(null);
 
   const choosePage = () => {
     switch (container) {
@@ -29,13 +34,43 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const downloadButton = downloadButtonRef.current;
+
+    const handleDownload = () => {
+      html2canvas(captureRef.current).then((canvas) => {
+        saveImg(canvas.toDataURL("image/jpg"), "image.jpg");
+      });
+    };
+
+    if (downloadButton) {
+      downloadButton.addEventListener("click", handleDownload);
+    }
+
+    return () => {
+      if (downloadButton) {
+        downloadButton.removeEventListener("click", handleDownload);
+      }
+    };
+  }, []);
+
+  const saveImg = (uri, filename) => {
+    let link = document.createElement("a");
+    document.body.appendChild(link);
+    link.href = uri;
+    link.download = filename;
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const handleShowParticipantsContainer = () => {
     setContainer("main");
   };
+
   return (
     <div className="w-[1000px] flex flex-col pt-[30px] pl-[50px]">
       <div className="flex justify-between items-center mb-[20px]">
-        <p className="font-bold ">채팅 이미지 생성기</p>
+        <p className="font-bold">채팅 이미지 생성기</p>
         <div className="flex gap-[10px]">
           <button
             onClick={handleShowParticipantsContainer}
@@ -43,14 +78,19 @@ function App() {
           >
             MAIN
           </button>
-          <button className="font-semibold text-[15px] text-white bg-red-200 rounded-[10px] px-[15px] py-[10px]">
+          <button
+            ref={downloadButtonRef}
+            className="font-semibold text-[15px] text-white bg-red-200 rounded-[10px] px-[15px] py-[10px]"
+          >
             이미지로 저장하기
           </button>
         </div>
       </div>
       <div className="flex">
-        <ChattingContainer />
-        <>{choosePage()}</>
+        <div ref={captureRef} className="flex">
+          <ChattingContainer />
+          <>{choosePage()}</>
+        </div>
       </div>
     </div>
   );
