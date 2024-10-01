@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from "react";
 import { useStore } from "../store/chatStore.js";
+import UserDropdwon from "./UserDropdown.jsx";
 
 export default function Message({
   chatId,
@@ -12,6 +13,7 @@ export default function Message({
   const [content, setContent] = useState(initialContent);
   const [time, setTime] = useState(initialTime);
   const { chatList, updateChatById } = useStore();
+  const [isShowDropdwn, setIsShowDropdown] = useState(false);
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -23,13 +25,15 @@ export default function Message({
   return (
     <tr>
       <td>
-        <input
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
-          type="text"
-          placeholder="말 한 사람"
-          className="w-[150px] mr-[15px]  rounded-[10px] px-[10px] py-[5px] border-[2px] border-gray-300"
-        />
+        <ul
+          className="w-[100px] h-[30px] flex flex-col pl-[5px] pt-[5px] mr-[15px]  rounded-[10px] bg-white text-gray-400"
+          onClick={() => {
+            setIsShowDropdown(!isShowDropdwn);
+          }}
+        >
+          선택해주세요
+          {isShowDropdwn && <UserDropdwon />}
+        </ul>
       </td>
       <td>
         <input

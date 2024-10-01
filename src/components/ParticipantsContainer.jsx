@@ -3,6 +3,7 @@ import Message from "./message.jsx";
 
 function ParticipantsContainer() {
   const { chatList, setChatList } = useStore();
+
   const handleAddMessage = (e) => {
     e.preventDefault();
     const newChat = {

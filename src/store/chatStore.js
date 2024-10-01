@@ -38,9 +38,9 @@ export const useStore = create((set) => ({
           ...state.chatList,
           {
             chatId: newChatId,
-            user,
-            content,
-            time,
+            user: "",
+            content: "",
+            time: "",
           },
         ],
         chatId: newChatId,

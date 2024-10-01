@@ -95,6 +95,7 @@ function Chat() {
             >
               {chat.user ? String(chat.user) : ""}
             </div>
+
             <div className="flex">
               <div
                 onClick={handleStyleContent}
