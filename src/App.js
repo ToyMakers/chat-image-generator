@@ -9,11 +9,15 @@ import ChatProperty from "./components/style-container/ChatProperty.jsx";
 import TimeProperty from "./components/style-container/TimeProperty.jsx";
 import html2canvas from "html2canvas";
 import { useEffect, useRef } from "react";
+import { useClipboard } from "./utils/useClipboard.jsx";
 
 function App() {
   const { container, setContainer } = useComponentStore();
-  const captureRef = useRef(null);
+  const chattingContainerRef = useRef(null);
   const downloadButtonRef = useRef(null);
+
+  // useClipboard 훅을 사용하여 clipboardHandler 가져오기
+  const { clipboardHandler } = useClipboard(chattingContainerRef);
 
   const choosePage = () => {
     switch (container) {
@@ -38,8 +42,10 @@ function App() {
     const downloadButton = downloadButtonRef.current;
 
     const handleDownload = () => {
-      html2canvas(captureRef.current).then((canvas) => {
-        saveImg(canvas.toDataURL("image/jpg"), "image.jpg");
+      html2canvas(chattingContainerRef.current).then((canvas) => {
+        saveImg(canvas.toDataURL("image/jpg"), "chatting_image.jpg");
+        clipboardHandler(); // 클립보드에 이미지 복사
+        alert("이미지 저장 완료! 클립보드에 복사되었습니다.");
       });
     };
 
@@ -52,7 +58,7 @@ function App() {
         downloadButton.removeEventListener("click", handleDownload);
       }
     };
-  }, []);
+  }, [clipboardHandler]); // clipboardHandler를 의존성 배열에 추가
 
   const saveImg = (uri, filename) => {
     let link = document.createElement("a");
@@ -87,8 +93,10 @@ function App() {
         </div>
       </div>
       <div className="flex">
-        <div ref={captureRef} className="flex">
-          <ChattingContainer />
+        <div className="flex">
+          <div ref={chattingContainerRef}>
+            <ChattingContainer />
+          </div>
           <>{choosePage()}</>
         </div>
       </div>
