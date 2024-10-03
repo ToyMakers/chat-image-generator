@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# :love_letter: 채팅 이미지 생성기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 참여자 관리
 
-## Available Scripts
+- **추가**
+  - 랜덤으로 생성하거나, 이름(5글자 제한)과 프로필 사진을 입력하여 참여자를 추가할 수 있습니다.
+- **수정**
+  - 본인을 선택하여(토글 버튼으로 상대방과 본인 전환 가능) 이름을 수정하고 프로필을 변경하거나 삭제할 수 있습니다.
 
-In the project directory, you can run:
+## 채팅 기능
 
-### `npm start`
+- **미리보기**
+  - 채팅 내용을 미리보기할 수 있습니다.
+- **추가**
+  - 내용을 입력하고 시간을 설정하여 채팅을 추가할 수 있습니다.
+- **삭제**
+  - 채팅을 삭제할 수 있습니다.
+- **드래그 앤 드롭 (보너스)**
+  - 드래그 앤 드롭으로 채팅 순서를 변경할 수 있습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 스타일 변경 옵션
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **프로필 사진 스타일**
+  - 넓이, 높이, 배경색, 테두리 두께, 테두리 색상, 테두리 스타일, 모서리 둥글기 등을 조절할 수 있습니다.
+- **채팅 스타일**
+  - 글자 색상, 모서리 둥글기, 글자 굵기, 글자 크기, 가장자리 여백, 너비 등을 변경할 수 있습니다.
+- **말한 사람 스타일**
+  - 글자 굵기, 글자 크기, 글자 색상을 조절할 수 있습니다.
+- **시간 스타일**
+  - 글자 크기와 색상을 변경할 수 있습니다.
+- **배경 스타일**
+  - 배경색, 가장자리 여백, 간격 등을 설정할 수 있습니다.
 
-### `npm test`
+## 이미지로 저장하기
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **파일로 저장**
+  - 로딩 화면이 표시되며, 완료 후 알림이 나타납니다.
+- **클립보드로 복사**
+  - 로딩 화면이 표시되며, 완료 후 알림이 나타납니다.
