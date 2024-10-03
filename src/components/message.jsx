@@ -48,7 +48,7 @@ export default function Message({
         <input
           value={time}
           onChange={(e) => setTime(e.target.value)}
-          type="text"
+          type="time"
           placeholder="시간"
           className="w-[150px]  rounded-[10px] px-[10px] py-[5px]"
         />
