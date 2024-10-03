@@ -1,9 +1,10 @@
 import { useStore } from "../store/chatStore.js";
 import { useComponentStore } from "../store/showComponentStore.js";
 import ParticipantModal from "./participantModal.jsx";
+import { participants } from "../constants/participants.js";
 
 function UserDropdown({ chatId, onUserSelect }) {
-  const { userList, addUserToChatById } = useStore();
+  const { userList, setUserList, addUserToChatById } = useStore();
   const { ismodalOpen, setIsModalOpen } = useComponentStore();
 
   const handleSelect = (username) => {
@@ -11,12 +12,18 @@ function UserDropdown({ chatId, onUserSelect }) {
     onUserSelect(username);
   };
 
+  const handleRandomUser = () => {
+    const randomIndex = Math.floor(Math.random() * participants.length);
+    const randomParticipant = participants[randomIndex];
+    setUserList(randomParticipant.username);
+  };
+
   return (
     <div className="bg-white border-[3px] z-[10] rounded-[10px]">
       <li className="list-none py-[5px] px-[5px] rounded-[10px] hover:bg-gray-100">
         <button
           onClick={() => {
-            setIsModalOpen(true); // 클릭 시 모달 열기
+            setIsModalOpen(true);
           }}
           className="flex items-center"
         >
@@ -29,7 +36,6 @@ function UserDropdown({ chatId, onUserSelect }) {
         </button>
       </li>
 
-      {/* 모달 오픈 여부에 따라 모달 렌더링 */}
       {ismodalOpen && (
         <div>
           <ParticipantModal chatId={chatId} setIsModalOpen={setIsModalOpen} />
@@ -37,9 +43,14 @@ function UserDropdown({ chatId, onUserSelect }) {
       )}
 
       <li className="list-none py-[5px] px-[5px] rounded-[10px] hover:bg-gray-100">
-        <button className="flex items-center">
+        <button
+          onClick={() => {
+            handleRandomUser();
+          }}
+          className="flex items-center"
+        >
           <img
-            alt="참여자 추가"
+            alt="참여자 랜덤 생성"
             src="./assets/ic-add.svg"
             className="mr-[5px] w-[10px] h-[10px]"
           />
