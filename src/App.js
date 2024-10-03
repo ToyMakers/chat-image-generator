@@ -9,14 +9,11 @@ import ChatProperty from "./components/style-container/ChatProperty.jsx";
 import TimeProperty from "./components/style-container/TimeProperty.jsx";
 import html2canvas from "html2canvas";
 import { useEffect, useRef } from "react";
-import AddParticipantsModal from "./components/AddParticipantModal.jsx";
 
 function App() {
   const { container, setContainer } = useComponentStore();
   const captureRef = useRef(null);
   const downloadButtonRef = useRef(null);
-  const { ismodalOpen, setIsModalOpen } = useComponentStore();
-  const modalBackground = useRef();
 
   const choosePage = () => {
     switch (container) {
@@ -93,19 +90,6 @@ function App() {
         <div ref={captureRef} className="flex">
           <ChattingContainer />
           <>{choosePage()}</>
-          {ismodalOpen && (
-            <div
-              className="fixed inset-0 left-[400px] top-[200px] z-[1100]"
-              ref={modalBackground}
-              onClick={(e) => {
-                if (e.target === modalBackground.current) {
-                  setIsModalOpen(false);
-                }
-              }}
-            >
-              <AddParticipantsModal />
-            </div>
-          )}
         </div>
       </div>
     </div>

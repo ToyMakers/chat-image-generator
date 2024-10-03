@@ -2,6 +2,8 @@ import { create } from "zustand";
 
 export const useStore = create((set) => ({
   chatList: [],
+  userList: [],
+  userId: 0,
   chatId: 0,
 
   // 채팅 스타일
@@ -30,6 +32,20 @@ export const useStore = create((set) => ({
   profileBorderStyle: "",
   profileBorderRadius: 0,
 
+  //유저 추가
+  setUserList: (username) =>
+    set((state) => {
+      const newUserId = state.userId + 1;
+      return {
+        userList: [
+          ...state.userList,
+          {
+            userId: newUserId,
+            username: username,
+          },
+        ],
+      };
+    }),
   //메시지 추가
   setChatList: (user, content, time) =>
     set((state) => {
@@ -47,6 +63,7 @@ export const useStore = create((set) => ({
         chatId: newChatId,
       };
     }),
+
   // 메시지 삭제
   deleteChatById: (chatId) =>
     set((state) => ({
@@ -62,6 +79,18 @@ export const useStore = create((set) => ({
               user: updatedUser,
               content: updatedContent,
               time: updatedTime,
+            }
+          : chat
+      ),
+    })),
+  //선택한 메시지에 user 추가
+  addUserToChatById: (chatId, newUser) =>
+    set((state) => ({
+      chatList: state.chatList.map((chat) =>
+        chat.chatId === chatId
+          ? {
+              ...chat,
+              user: newUser, // user를 새로운 유저로 업데이트
             }
           : chat
       ),
