@@ -30,6 +30,7 @@ export const useStore = create((set) => ({
   profileBorderStyle: "",
   profileBorderRadius: 0,
 
+  //메시지 추가
   setChatList: (user, content, time) =>
     set((state) => {
       const newChatId = state.chatId + 1;
@@ -46,7 +47,12 @@ export const useStore = create((set) => ({
         chatId: newChatId,
       };
     }),
-  // 특정 chatId의 채팅을 업데이트하는 함수 추가
+  // 메시지 삭제
+  deleteChatById: (chatId) =>
+    set((state) => ({
+      chatList: state.chatList.filter((chat) => chat.chatId !== chatId),
+    })),
+  // 메시지 수정
   updateChatById: (chatId, updatedUser, updatedContent, updatedTime) =>
     set((state) => ({
       chatList: state.chatList.map((chat) =>

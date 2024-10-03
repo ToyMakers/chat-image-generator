@@ -30,7 +30,6 @@ function ParticipantsContainer() {
           {chatList.map((chat) => {
             return (
               <Message
-                key={chat.chatId}
                 chatId={chat.chatId}
                 initialUser={chat.user}
                 initialContent={chat.content}

@@ -12,7 +12,7 @@ export default function Message({
   const [user, setUser] = useState(initialUser || "");
   const [content, setContent] = useState(initialContent);
   const [time, setTime] = useState(initialTime);
-  const { chatList, updateChatById } = useStore();
+  const { chatList, deleteChatById, updateChatById } = useStore();
   const [isShowDropdwn, setIsShowDropdown] = useState(false);
 
   const handleUpdate = (e) => {
@@ -20,6 +20,10 @@ export default function Message({
     console.log({ initialUser, initialContent, initialTime });
     updateChatById(chatId, user, content, time);
     console.log(chatList);
+  };
+
+  const handleDelete = () => {
+    deleteChatById(chatId);
   };
 
   return (
@@ -60,6 +64,15 @@ export default function Message({
           className="w-[50px] text-gray-100 hover:text-black-100"
         >
           생성
+        </button>
+      </td>
+      <td>
+        <button
+          type="button"
+          onClick={handleDelete}
+          className="w-[50px] text-gray-100 hover:text-black-100"
+        >
+          삭제
         </button>
       </td>
     </tr>

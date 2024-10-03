@@ -3,7 +3,6 @@ import { useComponentStore } from "../store/showComponentStore.js";
 
 function UserDropdown({ chatId }) {
   const { chatList } = useStore();
-
   const { setIsModalOpen } = useComponentStore();
 
   return (
