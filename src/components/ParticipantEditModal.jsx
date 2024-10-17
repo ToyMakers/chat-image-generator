@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useStore } from "../store/chatStore";
 
-export default function ParticipantModal({ chatId, setIsModalOpen }) {
-  const [username, setUsername] = useState("");
-  const [profileImage, setProfileImage] = useState(null); // 프로필 이미지 상태 추가
+export default function ParticipantEditModal({ chatId, setIsModalOpen }) {
+  const { chatList } = useStore();
+  const [username, setUsername] = useState(chatList.user);
+  const [profileImage, setProfileImage] = useState(null);
   const { setUserList } = useStore();
+
+  useEffect(() => {
+    const chat = chatList.find((chat) => chat.chatId === chatId);
+    if (chat) {
+      setUsername(chat.user);
+      setProfileImage(chat.profileImg);
+    }
+  }, [chatId, chatList]);
 
   const handleAddUser = (e) => {
     e.preventDefault();
@@ -30,7 +39,7 @@ export default function ParticipantModal({ chatId, setIsModalOpen }) {
 
   return (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-auto bg-white border-[2px] border-gray-100 border-opacity-50 overflow-hidden flex-col px-[20px] py-[30px] items-center rounded-[30px]">
-      <h1 className="font-bold text-[16px]">참여자 추가하기</h1>
+      <h1 className="font-bold text-[16px]">참여자 수정</h1>
       <form className="flex flex-col mt-[10px] text-[14px]">
         <label className="flex flex-col">
           이름
@@ -38,26 +47,26 @@ export default function ParticipantModal({ chatId, setIsModalOpen }) {
             type="text"
             maxLength={5} // 5글자 제한
             value={username}
+            placeholder={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="5자 이내로 이름을 입력해주세요"
             className="w-[200px] py-[5px] pl-[5px] mt-[5px] border-[1px] rounded-[5px]"
           />
         </label>
+
         <label className="flex flex-col mt-[10px]">
           프로필 사진
+          <img
+            src={profileImage}
+            alt="Preview"
+            className="mt-[10px] w-[50px] h-[50px]  border border-gray-200"
+          />
           <input
             type="file"
             onChange={handleProfileImageChange} // 파일 변경 시 호출되는 함수
             className="mt-[5px]"
           />
         </label>
-        {profileImage && (
-          <img
-            src={profileImage}
-            alt="Preview"
-            className="mt-[10px] w-[50px] h-[50px] rounded-full border border-gray-200"
-          />
-        )}
+
         <div className="flex">
           <button
             onClick={handleAddUser}

@@ -33,7 +33,7 @@ export const useStore = create((set) => ({
   profileBorderRadius: 0,
 
   //유저 추가
-  setUserList: (username) =>
+  setUserList: (username, profileImg) =>
     set((state) => {
       const newUserId = state.userId + 1;
       return {
@@ -42,6 +42,7 @@ export const useStore = create((set) => ({
           {
             userId: newUserId,
             username: username,
+            profileImg: profileImg,
           },
         ],
       };

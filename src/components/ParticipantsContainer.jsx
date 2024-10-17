@@ -1,5 +1,5 @@
 import { useStore } from "../store/chatStore.js";
-import Message from "./message.jsx";
+import Message from "./Message.jsx";
 
 function ParticipantsContainer() {
   const { chatList, setChatList } = useStore();

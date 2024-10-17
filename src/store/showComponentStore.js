@@ -2,14 +2,18 @@ import { create } from "zustand";
 
 export const useComponentStore = create((set) => ({
   container: "",
-  ismodalOpen: false,
-
+  isAddModalOpen: false,
+  isEditModalOpen: false,
   setContainer: (container) =>
     set(() => ({
       container: container,
     })),
-  setIsModalOpen: (ismodalOpen) =>
+  setIsAddModalOpen: (isAddModalOpen) =>
     set(() => ({
-      ismodalOpen: ismodalOpen,
+      isAddModalOpen: isAddModalOpen,
+    })),
+  setIsEditModalOpen: (isEditModalOpen) =>
+    set(() => ({
+      isEditModalOpen: isEditModalOpen,
     })),
 }));

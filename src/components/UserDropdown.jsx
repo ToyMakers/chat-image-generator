@@ -1,29 +1,35 @@
 import { useStore } from "../store/chatStore.js";
 import { useComponentStore } from "../store/showComponentStore.js";
-import ParticipantModal from "./participantModal.jsx";
 import { participants } from "../constants/participants.js";
+import ParticipantModal from "./ParticipantModal.jsx";
+import ParticipantEditModal from "./ParticipantEditModal.jsx";
 
 function UserDropdown({ chatId, onUserSelect }) {
   const { userList, setUserList, addUserToChatById } = useStore();
-  const { ismodalOpen, setIsModalOpen } = useComponentStore();
+  const {
+    isAddModalOpen,
+    setIsAddModalOpen,
+    isEditModalOpen,
+    setIsEditModalOpen,
+  } = useComponentStore();
 
-  const handleSelect = (username) => {
+  const handleSelect = (username, profileImg) => {
     addUserToChatById(chatId, username);
-    onUserSelect(username);
+    onUserSelect(username, profileImg); // 프로필 이미지도 전달
   };
 
   const handleRandomUser = () => {
     const randomIndex = Math.floor(Math.random() * participants.length);
     const randomParticipant = participants[randomIndex];
-    setUserList(randomParticipant.username);
+    setUserList(randomParticipant.username, randomParticipant.profilePicture); // 프로필 이미지 포함
   };
 
   return (
-    <div className="bg-white border-[3px] z-[10] rounded-[10px]">
-      <li className="list-none py-[5px] px-[5px] rounded-[10px] hover:bg-gray-100">
+    <div className="bg-white border-[3px] z-[10] rounded-[10px] ">
+      <li className="list-none py-[5px] px-[5px] rounded-[10px] hover:bg-gray-100 ">
         <button
           onClick={() => {
-            setIsModalOpen(true);
+            setIsAddModalOpen(true);
           }}
           className="flex items-center"
         >
@@ -36,9 +42,12 @@ function UserDropdown({ chatId, onUserSelect }) {
         </button>
       </li>
 
-      {ismodalOpen && (
+      {isAddModalOpen && (
         <div>
-          <ParticipantModal chatId={chatId} setIsModalOpen={setIsModalOpen} />
+          <ParticipantModal
+            chatId={chatId}
+            setIsModalOpen={setIsAddModalOpen}
+          />
         </div>
       )}
 
@@ -58,16 +67,40 @@ function UserDropdown({ chatId, onUserSelect }) {
         </button>
       </li>
 
-      {userList &&
-        userList.map((user) => (
-          <li
-            key={user.userId}
-            onClick={() => handleSelect(user.username)}
-            className="list-none py-[5px] px-[5px] rounded-[10px] hover:bg-gray-100"
+      {userList.map((user) => (
+        <li
+          key={user.userId}
+          onClick={() => handleSelect(user.username, user.profileImg)} // 프로필 이미지 전달
+          className="list-none py-[5px] px-[5px] rounded-[10px] hover:bg-gray-100 flex items-center"
+        >
+          <img
+            src={user.profileImg}
+            alt={`${user.username} 프로필`}
+            className="w-[20px] h-[20px] rounded-full mr-[10px]"
+          />
+          {user.username}
+          <button
+            onClick={() => {
+              setIsEditModalOpen(true);
+            }}
           >
-            {user.username}
-          </li>
-        ))}
+            <img
+              src="./assets/ic-edit.png"
+              alt="수정 아이콘"
+              className="w-[10px] h-[10px] ml-3 "
+            />
+          </button>
+        </li>
+      ))}
+
+      {isEditModalOpen && (
+        <div>
+          <ParticipantEditModal
+            chatId={chatId}
+            setIsModalOpen={setIsEditModalOpen}
+          />
+        </div>
+      )}
     </div>
   );
 }
