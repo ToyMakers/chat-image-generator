@@ -63,11 +63,11 @@ function Chat() {
     <>
       {chatList.map((chat) => (
         <div
-          className="flex"
+          className="flex "
           style={{ marginTop: `${backgroundMargin}px` }}
           key={chat.chatId}
         >
-          <div className="mr-[10px] mb-[5px] h-min p-0 hover:border-[2px] hover:border-red-200">
+          <div className="mr-[10px] mb-[5px] h-min p-0 hover:border-[2px] hover:border-red-200 box-border">
             <img
               alt="프로필 사진"
               onClick={handleStyleProfile}
