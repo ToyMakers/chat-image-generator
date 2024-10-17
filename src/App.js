@@ -8,7 +8,7 @@ import ProfileProperty from "./components/style-container/ProfileProperty.jsx";
 import ChatProperty from "./components/style-container/ChatProperty.jsx";
 import TimeProperty from "./components/style-container/TimeProperty.jsx";
 import html2canvas from "html2canvas";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useClipboard } from "./utils/useClipboard.jsx";
 
 function App() {

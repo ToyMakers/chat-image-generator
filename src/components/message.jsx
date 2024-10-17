@@ -53,6 +53,7 @@ export default function Message({
             className="w-[100px] h-[30px] flex flex-col pl-[5px] pt-[5px] mr-[15px] rounded-[10px] bg-white text-gray-400"
             onClick={() => {
               setIsShowDropdown(!isShowDropdown);
+              setSelectedChatId(chatId); // chatId 설정
             }}
           >
             {currentUserName}

@@ -31,7 +31,7 @@ export function ParticipantModal({ chatId, setIsModalOpen }) {
   return (
     <>
       <div
-        className="fixed inset-0 bg-black-100 bg-opacity-50 backdrop-blur-sm z-10"
+        className="fixed inset-0 bg-black-100 bg-opacity-20 backdrop-blur-sm z-10"
         onClick={() => setIsModalOpen(false)} // 오버레이 클릭 시 모달 닫기
       />
       <div className="z-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-auto bg-white border-[2px] border-gray-100 border-opacity-50 overflow-hidden flex-col px-[20px] py-[30px] items-center rounded-[30px]">

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { ChromePicker } from "react-color";
-import { useChatBackgroundStore } from "../../store/chatBackgroundStore";
+import { useStyleStore } from "../../store/styleStore";
 
 export default function BackgroundProperty() {
   const [isColorPicker, setIsColorPicker] = useState(false);
   const [color, setColor] = useState("#000");
   const { setBackgroundColor, setBackgroundPadding, setBackgroundMargin } =
-    useChatBackgroundStore();
+    useStyleStore();
 
   const handleShowColorPicker = () => {
     setIsColorPicker(!isColorPicker);

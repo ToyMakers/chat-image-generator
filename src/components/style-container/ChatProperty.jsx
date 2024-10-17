@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useStore } from "../../store/chatStore";
 import { ChromePicker } from "react-color";
+import { useStyleStore } from "../../store/styleStore";
 
 // 채팅 스타일 컴포넌트
 export default function ChatProperty() {
@@ -13,7 +13,7 @@ export default function ChatProperty() {
     setChatFontSize,
     setChatPadding,
     setChatWidth,
-  } = useStore();
+  } = useStyleStore();
 
   const handleShowColorPicker = () => {
     setIsColorPicker(!isColorPicker);

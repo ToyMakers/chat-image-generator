@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useStore } from "../../store/chatStore";
-
 import { ChromePicker } from "react-color";
+import { useStyleStore } from "../../store/styleStore";
 
 export default function UserProperty() {
   const [isColorPicker, setIsColorPicker] = useState(false);
   const [color, setColor] = useState("#000");
   const { setSenderFontWeight, setSenderFontSize, setSenderFontColor } =
-    useStore();
+    useStyleStore();
 
   const handleShowColorPicker = () => {
     setIsColorPicker(!isColorPicker);

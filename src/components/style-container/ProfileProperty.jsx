@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useStore } from "../../store/chatStore";
 import { ChromePicker } from "react-color";
+import { useStyleStore } from "../../store/styleStore";
 
 export default function ProfileProperty() {
   const {
@@ -11,7 +11,7 @@ export default function ProfileProperty() {
     setProfileBorderColor,
     setProfileBorderStyle,
     setProfileBorderRadius,
-  } = useStore();
+  } = useStyleStore();
   const [isColorPickerBackground, setIsColorPickerBackground] = useState(false);
   const [isColorPickerBorder, setIsColorPickerBorder] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("#000");

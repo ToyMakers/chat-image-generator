@@ -1,9 +1,9 @@
-import { useChatBackgroundStore } from "../store/chatBackgroundStore";
+import { useStyleStore } from "../store/styleStore";
 import Chat from "./Chat";
 import { useComponentStore } from "../store/showComponentStore";
 
 function ChattingContainer() {
-  const { backgroundColor, backgroundPadding } = useChatBackgroundStore();
+  const { backgroundColor, backgroundPadding } = useStyleStore();
   const { container, setContainer } = useComponentStore();
   const handleStyleBackgroundColor = (e) => {
     e.stopPropagation(); // prevent other events from triggering

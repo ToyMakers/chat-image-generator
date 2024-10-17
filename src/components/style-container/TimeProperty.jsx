@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ChromePicker } from "react-color";
-import { useStore } from "../../store/chatStore";
+import { useStyleStore } from "../../store/styleStore";
 export default function TimeProperty() {
   const [isColorPicker, setIsColorPicker] = useState(false);
   const [color, setColor] = useState("#000");
-  const { setTimeTextColor, setTimeTextSize } = useStore();
+  const { setTimeTextColor, setTimeTextSize } = useStyleStore();
 
   const handleShowColorPicker = () => {
     setIsColorPicker(!isColorPicker);
