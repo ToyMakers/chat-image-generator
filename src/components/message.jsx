@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useStore } from "../store/chatStore.js";
 import UserDropdown from "./UserDropdown.jsx";
+import { useComponentStore } from "../store/showComponentStore.js";
+import { ModalPortal } from "./ModalPortal.jsx";
+import { ParticipantModal } from "./ParticipantModal.jsx";
+import { ParticipantEditModal } from "./ParticipantEditModal.jsx";
 
 export default function Message({
   chatId,
@@ -13,6 +17,15 @@ export default function Message({
   const [time, setTime] = useState(initialTime);
   const { chatList, deleteChatById, updateChatById } = useStore();
   const [isShowDropdown, setIsShowDropdown] = useState(false);
+
+  //모달로 chatId 전달
+  const [selectedChatId, setSelectedChatId] = useState(null);
+  const {
+    isAddModalOpen,
+    setIsAddModalOpen,
+    isEditModalOpen,
+    setIsEditModalOpen,
+  } = useComponentStore();
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -83,7 +96,24 @@ export default function Message({
         </td>
       </tr>
       {isShowDropdown && (
-        <UserDropdown chatId={chatId} onUserSelect={handleUserSelect} />
+        <UserDropdown chatId={selectedChatId} onUserSelect={handleUserSelect} />
+      )}
+      {isAddModalOpen && (
+        <ModalPortal>
+          <ParticipantModal
+            chatId={chatId}
+            setIsModalOpen={setIsAddModalOpen}
+          />
+        </ModalPortal>
+      )}
+
+      {isEditModalOpen && (
+        <ModalPortal>
+          <ParticipantEditModal
+            chatId={chatId}
+            setIsModalOpen={setIsEditModalOpen}
+          />
+        </ModalPortal>
       )}
     </>
   );

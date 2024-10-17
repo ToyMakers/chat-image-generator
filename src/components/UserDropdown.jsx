@@ -1,17 +1,9 @@
 import { useStore } from "../store/chatStore.js";
-import { useComponentStore } from "../store/showComponentStore.js";
 import { participants } from "../constants/participants.js";
-import ParticipantModal from "./ParticipantModal.jsx";
-import ParticipantEditModal from "./ParticipantEditModal.jsx";
-
+import { useComponentStore } from "../store/showComponentStore.js";
 function UserDropdown({ chatId, onUserSelect }) {
   const { userList, setUserList, addUserToChatById } = useStore();
-  const {
-    isAddModalOpen,
-    setIsAddModalOpen,
-    isEditModalOpen,
-    setIsEditModalOpen,
-  } = useComponentStore();
+  const { setIsAddModalOpen, setIsEditModalOpen } = useComponentStore();
 
   const handleSelect = (username, profileImg) => {
     addUserToChatById(chatId, username);
@@ -41,15 +33,6 @@ function UserDropdown({ chatId, onUserSelect }) {
           참여자 추가
         </button>
       </li>
-
-      {isAddModalOpen && (
-        <div>
-          <ParticipantModal
-            chatId={chatId}
-            setIsModalOpen={setIsAddModalOpen}
-          />
-        </div>
-      )}
 
       <li className="list-none py-[5px] px-[5px] rounded-[10px] hover:bg-gray-100">
         <button
@@ -92,15 +75,6 @@ function UserDropdown({ chatId, onUserSelect }) {
           </button>
         </li>
       ))}
-
-      {isEditModalOpen && (
-        <div>
-          <ParticipantEditModal
-            chatId={chatId}
-            setIsModalOpen={setIsEditModalOpen}
-          />
-        </div>
-      )}
     </div>
   );
 }
