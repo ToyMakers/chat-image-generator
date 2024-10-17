@@ -15,6 +15,7 @@ export default function Message({
   const [user, setUser] = useState(initialUser || "");
   const [content, setContent] = useState(initialContent);
   const [time, setTime] = useState(initialTime);
+  const [profileImg, setProfileImg] = useState(null); // 프로필 이미지 상태
   const { chatList, deleteChatById, updateChatById } = useStore();
   const [isShowDropdown, setIsShowDropdown] = useState(false);
 
@@ -29,16 +30,16 @@ export default function Message({
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log({ initialUser, initialContent, initialTime });
-    updateChatById(chatId, user, content, time);
+    updateChatById(chatId, user, content, time, profileImg);
   };
 
   const handleDelete = () => {
     deleteChatById(chatId);
   };
 
-  const handleUserSelect = (selectedUser) => {
+  const handleUserSelect = (selectedUser, selectedProfileImg) => {
     setUser(selectedUser);
+    setProfileImg(selectedProfileImg); // 프로필 이미지 설정
     setIsShowDropdown(false);
   };
 

@@ -10,6 +10,7 @@ function ParticipantsContainer() {
       user: "",
       content: "",
       time: "",
+      profileImg: null,
     };
     setChatList(newChat);
   };
@@ -34,6 +35,7 @@ function ParticipantsContainer() {
                 initialUser={chat.user}
                 initialContent={chat.content}
                 initialTime={chat.time}
+                profileImg={chat.profileImg}
               />
             );
           })}

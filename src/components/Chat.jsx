@@ -1,9 +1,9 @@
 import { useStyleStore } from "../store/styleStore.js";
 import { useComponentStore } from "../store/showComponentStore.js";
+import { useStore } from "../store/chatStore.js";
 
 function Chat() {
   const {
-    chatList,
     //유저 이름 속성
     senderFontWeight,
     senderFontSize,
@@ -28,6 +28,8 @@ function Chat() {
     profileBorderRadius,
     backgroundMargin,
   } = useStyleStore();
+  const { chatList } = useStore();
+
   const { container, setContainer } = useComponentStore();
 
   const handleStyleProfile = (e) => {
@@ -71,7 +73,7 @@ function Chat() {
               <img
                 alt="프로필 사진"
                 onClick={handleStyleProfile}
-                src="./assets/profile.png"
+                src={chat.profileImg ? chat.profileImg : "./assets/profile.png"} // 프로필 이미지 추가
                 style={{
                   width: `${profileWidth || 30}px`,
                   height: `${profileHeight || 30}px`,

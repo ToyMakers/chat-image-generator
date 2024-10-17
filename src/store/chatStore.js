@@ -22,7 +22,7 @@ export const useStore = create((set) => ({
       };
     }),
   //메시지 추가
-  setChatList: (user, content, time) =>
+  setChatList: (user, content, time, profileImg) =>
     set((state) => {
       const newChatId = state.chatId + 1;
       return {
@@ -33,6 +33,7 @@ export const useStore = create((set) => ({
             user: "",
             content: "",
             time: "",
+            profileImg: profileImg,
           },
         ],
         chatId: newChatId,
@@ -45,7 +46,13 @@ export const useStore = create((set) => ({
       chatList: state.chatList.filter((chat) => chat.chatId !== chatId),
     })),
   // 메시지 수정
-  updateChatById: (chatId, updatedUser, updatedContent, updatedTime) =>
+  updateChatById: (
+    chatId,
+    updatedUser,
+    updatedContent,
+    updatedTime,
+    updatedProfileImg
+  ) =>
     set((state) => ({
       chatList: state.chatList.map((chat) =>
         chat.chatId === chatId
@@ -54,6 +61,7 @@ export const useStore = create((set) => ({
               user: updatedUser,
               content: updatedContent,
               time: updatedTime,
+              profileImg: updatedProfileImg,
             }
           : chat
       ),

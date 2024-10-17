@@ -1,6 +1,6 @@
 import { useStyleStore } from "../store/styleStore";
-import Chat from "./Chat";
 import { useComponentStore } from "../store/showComponentStore";
+import Chat from "./Chat";
 
 function ChattingContainer() {
   const { backgroundColor, backgroundPadding } = useStyleStore();
@@ -19,7 +19,7 @@ function ChattingContainer() {
         backgroundColor: backgroundColor,
         padding: `${backgroundPadding}px`,
       }}
-      className="w-[300px] h-[500px] pt-[50px] overflow-y-scroll overflow-x-hidden hover:border-[2px] hover:border-red-200"
+      className="z-0 w-[300px] h-[500px] pt-[50px] overflow-y-scroll overflow-x-hidden hover:border-[2px] hover:border-red-200"
     >
       <Chat />
     </div>
