@@ -13,7 +13,7 @@ function UserDropdown({ chatId, onUserSelect }) {
   const handleRandomUser = () => {
     const randomIndex = Math.floor(Math.random() * participants.length);
     const randomParticipant = participants[randomIndex];
-    setUserList(randomParticipant.username, randomParticipant.profilePicture); // 프로필 이미지 포함
+    setUserList(randomParticipant.username, randomParticipant.profile); // 프로필 이미지 포함
   };
 
   return (
