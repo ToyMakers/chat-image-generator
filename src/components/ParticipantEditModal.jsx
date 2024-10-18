@@ -9,8 +9,8 @@ export function ParticipantEditModal({ chatId, setIsModalOpen }) {
   useEffect(() => {
     const chat = chatList.find((chat) => chat.chatId === chatId);
     if (chat) {
-      setUsername(chat.user);
-      setProfileImage(chat.profileImg);
+      setUsername(chat.user || ""); // 채팅의 사용자 이름이 없을 경우 기본값 설정
+      setProfileImage(chat.profileImg || null); // 채팅의 프로필 이미지가 없을 경우 기본값 설정
     }
   }, [chatId, chatList]);
 
@@ -18,7 +18,7 @@ export function ParticipantEditModal({ chatId, setIsModalOpen }) {
     e.preventDefault();
 
     if (username.trim().length > 0 && profileImage) {
-      setUserList(username, profileImage);
+      setUserList(username, profileImage); // 이 함수가 어떻게 동작하는지 확인해야 함
       setIsModalOpen(false);
     } else {
       alert("유저 이름과 프로필 사진을 입력해주세요.");
